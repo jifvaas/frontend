@@ -6,27 +6,37 @@ interface MyState {
     message: string;
 }
 
-class Home extends React.Component<{},{}> {
+class Home extends React.Component<{},MyState> {
     state: MyState = {
       loading: true,
       message: ''
     };
-    private entryService = new EntryService();
+    private entryService: EntryService;
+    constructor(props: any) {
+        super(props);
+        this.entryService = new EntryService();
+        this.refreshEntry = this.refreshEntry.bind(this);
+    }
 
     componentDidMount() {
-        this.entryService.fetchEntries().then((entries) => {
-            this.updateEntry(entries);
-        }).catch((error) => {
-            console.error(error);
-        })
+        this.refreshEntry();
     }
 
     render() {
       return (
         <div>
-          {this.state.loading ? 'Loading....' : this.state.message}
+          {this.state.loading ? 'Loading....' : this.state.message} <br />
+          <button onClick={this.refreshEntry}>Refresh</button>
         </div>
       );
+    }
+
+    private refreshEntry() {
+        this.entryService.fetchEntries().then((entries) => {
+            this.updateEntry(entries);
+        }).catch((error) => {
+            console.error(error);
+        })
     }
 
     private updateEntry(entries: string[]) {
