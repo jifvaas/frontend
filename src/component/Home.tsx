@@ -1,19 +1,16 @@
 import * as React from "react";
 import { EntryService } from "../service/EntryService";
 
-interface MyState {
-    loading: boolean;
-    message: string;
-}
-
-class Home extends React.Component<{},MyState> {
-    state: MyState = {
-      loading: true,
-      message: ''
-    };
+class Home extends React.Component<{}, { loading: boolean, message: string }> {
     private entryService: EntryService;
-    constructor(props: any) {
+    constructor(props: {}) {
         super(props);
+
+        this.state = {
+            loading: true,
+            message: ''
+        }
+
         this.entryService = new EntryService();
         this.refreshEntry = this.refreshEntry.bind(this);
     }
