@@ -12,7 +12,6 @@ class Home extends React.Component<{}, { loading: boolean, message: string }> {
         }
 
         this.entryService = new EntryService();
-        this.refreshEntry = this.refreshEntry.bind(this);
     }
 
     componentDidMount() {
@@ -23,7 +22,7 @@ class Home extends React.Component<{}, { loading: boolean, message: string }> {
       return (
         <div>
           {this.state.loading ? 'Loading....' : this.state.message} <br />
-          <button onClick={this.refreshEntry}>Refresh</button>
+          <button onClick={ () => this.refreshEntry }>Refresh</button>
         </div>
       );
     }
@@ -49,4 +48,4 @@ class Home extends React.Component<{}, { loading: boolean, message: string }> {
     }
   }
 
-  export default Home
+  export default Home;
