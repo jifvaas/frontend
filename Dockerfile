@@ -1,12 +1,12 @@
-FROM node:14 as build-deps
+FROM node as build-deps
 
+# Set the working directory
 WORKDIR /app
 
-COPY . /app
-
+# Copy the package.json and install the dependencies
+COPY . ./
 RUN npm i &&\
     npm run build
-
 
 FROM nginx:alpine
 
