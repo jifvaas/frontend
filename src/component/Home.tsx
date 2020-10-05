@@ -22,7 +22,7 @@ class Home extends React.Component<{}, { loading: boolean, message: string }> {
       return (
         <div>
           {this.state.loading ? 'Loading....' : this.state.message} <br />
-          <button onClick={ () => this.refreshEntry }>Refresh</button>
+          <button onClick={ () => this.refreshEntry() }>Refresh</button>
         </div>
       );
     }
